@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import './App.css';
-import Header from './Header';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
