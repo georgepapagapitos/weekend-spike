@@ -1,33 +1,32 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import './App.css';
 import SideMenu from './SideMenu';
 import Header from './Header';
-import PageHeader from './PageHeader';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Button from '@material-ui/core/Button';
-import SaveIcon from '@material-ui/icons/Save';
-import DeleteIcon from '@material-ui/icons/Delete';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import TextField from '@material-ui/core/TextField';
+// import ButtonGroup from '@material-ui/core/ButtonGroup';
+// import Button from '@material-ui/core/Button';
+// import SaveIcon from '@material-ui/icons/Save';
+// import DeleteIcon from '@material-ui/icons/Delete';
+// import Checkbox from '@material-ui/core/Checkbox';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import TextField from '@material-ui/core/TextField';
 
 import { makeStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { green, orange } from '@material-ui/core/colors';
+// import { green, orange } from '@material-ui/core/colors';
 import 'fontsource-roboto';
 
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+// import Typography from '@material-ui/core/Typography';
+// import Container from '@material-ui/core/Container';
 
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+// import Paper from '@material-ui/core/Paper';
+// import Grid from '@material-ui/core/Grid';
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
+// import AppBar from '@material-ui/core/AppBar';
+// import Toolbar from '@material-ui/core/Toolbar';
+// import IconButton from '@material-ui/core/IconButton';
+// import MenuIcon from '@material-ui/icons/Menu';
+import Employees from '../pages/Employees/Employees';
 
 
 
@@ -44,7 +43,19 @@ const theme = createMuiTheme({
     background: {
       default: '#f4f5fd'
     }
-  }
+  },
+  overrides: {
+    MuiAppBar: {
+      root: {
+        transform: 'translateZ(0)'
+      }
+    }
+  },
+  // props: {
+  //   MuiIconButton: {
+  //     disableRipple: true
+  //   }
+  // }
 })
 
 // const useStyles = makeStyles({
@@ -115,7 +126,7 @@ const App = () => {
       <SideMenu />
       <div className={classes.appMain}>
         <Header />
-        <PageHeader title='Page Header' subtitle='Page Description' icon={<PeopleOutlineIcon fontSize='large'/>}/>
+        <Employees />
       </div>
       <CssBaseline />
     </ThemeProvider>
