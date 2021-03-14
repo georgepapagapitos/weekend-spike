@@ -29,7 +29,7 @@ function EmployeeForm() {
     temp.fullName = values.fullName ? '' : 'This field is required.'
     temp.email = (/$^|.+@.+..+/).test(values.email) ? '' : 'Enter a valid email address.'
     temp.mobile = values.mobile.length > 9 ? '' : 'Minimum of 10 numbers required.'
-    temp.departmentId = values.departmentId.length !== 0 ? '' : 'This field is required.'
+    temp.departmentId = values.departmentId.length ? '' : 'This field is required.'
     setErrors({
       ...temp
     })
@@ -99,7 +99,7 @@ function EmployeeForm() {
             value={values.departmentId}
             onChange={handleInputChange}
             options={employeeService.getDepartmentCollection()}
-            errors={errors.departmentId}
+            error={errors.departmentId}
           />
           <Controls.DatePicker 
             name="hireDate"
