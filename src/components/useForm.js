@@ -4,6 +4,7 @@ import { useState } from 'react';
 function useForm(initialValues) {
 
   const [values, setValues] = useState(initialValues);
+  const [errors, setErrors] = useState({});
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -16,6 +17,8 @@ function useForm(initialValues) {
   return {
     values,
     setValues,
+    errors,
+    setErrors,
     handleInputChange
   }
 }
@@ -32,9 +35,10 @@ const useStyles = makeStyles(theme => ({
 function Form(props) {
 
   const classes = useStyles();
+  const { children, ...other } = props;
 
   return (
-    <form className={classes.root} autoComplete="off">
+    <form className={classes.root} autoComplete="off" {...other}>
       {props.children}
     </form>
   )

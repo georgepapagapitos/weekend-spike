@@ -24,14 +24,37 @@ const initialValues = {
 
 function EmployeeForm() {
 
+  const validate = () => {
+    let temp = {};
+    temp.fullName = values.fullName ? '' : 'This field is required.'
+    temp.email = (/$^|.+@.+..+/).test(values.email) ? '' : 'Enter a valid email address.'
+    temp.mobile = values.mobile.length > 9 ? '' : 'Minimum of 10 numbers required.'
+    temp.departmentId = values.departmentId.length !== 0 ? '' : 'This field is required.'
+    setErrors({
+      ...temp
+    })
+
+    return Object.values(temp).every(x => x === '');
+
+  }
+
   const {
     values,
     setValues,
+    errors,
+    setErrors,
     handleInputChange
   } = useForm(initialValues);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if(validate()) {
+      window.alert('valid');
+    }
+  }
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Grid container>
         <Grid item xs={6}>
           <Controls.Input 
@@ -39,18 +62,21 @@ function EmployeeForm() {
             label="Full Name"
             value={values.fullName}
             onChange={handleInputChange}
+            error={errors.fullName}
           />
           <Controls.Input
             name="email"
             label="Email"
             value={values.email}
             onChange={handleInputChange}
+            error={errors.email}
           />
           <Controls.Input
             name="mobile"
             label="Mobile"
             value={values.mobile}
             onChange={handleInputChange}
+            error={errors.mobile}
           />
           <Controls.Input
             name="city"
@@ -72,7 +98,8 @@ function EmployeeForm() {
             label='Department'
             value={values.departmentId}
             onChange={handleInputChange}
-            options={employeeService.getDepartmentCollection()} 
+            options={employeeService.getDepartmentCollection()}
+            errors={errors.departmentId}
           />
           <Controls.DatePicker 
             name="hireDate"

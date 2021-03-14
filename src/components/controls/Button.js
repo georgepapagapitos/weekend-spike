@@ -22,7 +22,7 @@ function Button(props) {
     color={color || 'primary'}
     onClick={onClick}
     {...other}
-    classes={{root:classes.root, label:classes.label}}>
+    classes={{root: classes.root, label: classes.label}}>
       {text}
     </MuiButton>
   )

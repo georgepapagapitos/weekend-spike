@@ -16,7 +16,7 @@ function DatePicker(props) {
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <KeyboardDatePicker disableToolbar variant='inline' inputVariant='outlined'
       label={label}
-      formate='MMM/dd/yyyy'
+      format='MM/dd/yyyy'
       name={name}
       value={value}
       onChange={date => onChange(convertToDefaultEventParameter(name, date))}
