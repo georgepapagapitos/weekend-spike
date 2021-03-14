@@ -1,6 +1,7 @@
 import { Grid } from '@material-ui/core';
 import Controls from '../../components/controls/Controls';
 import { useForm, Form } from '../../components/useForm';
+import * as employeeService from '../../services/employeeService';
 
 const genderItems = [
   {id: 'male', title: 'Male'},
@@ -53,6 +54,13 @@ function EmployeeForm() {
             value={values.gender}
             onChange={handleInputChange}
             items={genderItems}
+          />
+          <Controls.Select
+            name="departmentId"
+            label='Department'
+            value={values.departmentId}
+            onChange={handleInputChange}
+            options={employeeService.getDepartmentCollection()} 
           />
         </Grid>
       </Grid>
