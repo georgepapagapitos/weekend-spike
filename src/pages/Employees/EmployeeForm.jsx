@@ -24,17 +24,30 @@ const initialValues = {
 
 function EmployeeForm() {
 
-  const validate = () => {
-    let temp = {};
-    temp.fullName = values.fullName ? '' : 'This field is required.'
-    temp.email = (/$^|.+@.+..+/).test(values.email) ? '' : 'Enter a valid email address.'
-    temp.mobile = values.mobile.length > 9 ? '' : 'Minimum of 10 numbers required.'
-    temp.departmentId = values.departmentId.length ? '' : 'This field is required.'
+  const validate = (fieldValues = values) => {
+
+    let temp = {...errors};
+
+    if('fullName' in fieldValues) {
+      temp.fullName = fieldValues.fullName ? '' : 'This field is required.';
+    }
+    if('email' in fieldValues) {
+      temp.email = (/$^|.+@.+..+/).test(fieldValues.email) ? '' : 'Enter a valid email address.';
+    }
+    if('mobile' in fieldValues) {
+      temp.mobile = fieldValues.mobile.length > 9 ? '' : 'Minimum of 10 numbers required.';
+    }
+    if('departmentId' in fieldValues) {
+      temp.departmentId = fieldValues.departmentId.length ? '' : 'This field is required.'
+    }
+
     setErrors({
       ...temp
     })
 
-    return Object.values(temp).every(x => x === '');
+    if(fieldValues === values) {
+      return Object.values(temp).every(x => x === '');
+    }
 
   }
 
@@ -43,13 +56,15 @@ function EmployeeForm() {
     setValues,
     errors,
     setErrors,
-    handleInputChange
-  } = useForm(initialValues);
+    handleInputChange,
+    resetForm
+  } = useForm(initialValues, true, validate);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if(validate()) {
-      window.alert('valid');
+      employeeService.insertEmployee(values);
+      resetForm();
     }
   }
 
@@ -121,6 +136,7 @@ function EmployeeForm() {
             <Controls.Button
               text="Reset"
               color="default"
+              onClick={resetForm}
             /> 
           </div>
         </Grid>
