@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import SideMenu from './SideMenu';
 import Header from './Header';
+import PageHeader from './PageHeader';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
@@ -26,6 +27,25 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
+
+
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#333996',
+      light: '#3c44b126'
+    },
+    secondary: {
+      main: '#f83245',
+      light: '#f8324526'
+    },
+    background: {
+      default: '#f4f5fd'
+    }
+  }
+})
 
 // const useStyles = makeStyles({
 //   root: {
@@ -91,13 +111,14 @@ const App = () => {
   const classes = useStyles();
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <SideMenu />
       <div className={classes.appMain}>
         <Header />
+        <PageHeader title='Page Header' subtitle='Page Description' icon={<PeopleOutlineIcon fontSize='large'/>}/>
       </div>
       <CssBaseline />
-    </>
+    </ThemeProvider>
 
     // <ThemeProvider theme={theme}>
 
