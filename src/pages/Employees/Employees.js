@@ -8,6 +8,7 @@ import { useState } from "react";
 import Controls from "../../components/controls/Controls";
 import { Search } from "@material-ui/icons";
 import AddIcon from '@material-ui/icons/Add';
+import Popup from "../../components/Popup";
 
 const useStyles = makeStyles(theme => ({
   pageContent: {
@@ -36,6 +37,7 @@ function Employees() {
 
   const [records, setRecords] = useState(employeeService.getAllEmployees());
   const [filterFunction, setFilterFunction] = useState({fn:items => {return items;}});
+  const [openPopup, setOpenPopup] = useState(false);
 
   const { 
     TableContainer,
@@ -67,7 +69,6 @@ function Employees() {
         fontSize='large'/>}
       />
       <Paper className={classes.pageContent}>
-        <EmployeeForm />
         <Toolbar>
           <Controls.Input
             label="Search Employees"
@@ -85,6 +86,7 @@ function Employees() {
             variant='outlined'
             startIcon={<AddIcon/>}
             className={classes.newButton}
+            onClick={() => setOpenPopup(true)}
           />
         </Toolbar>
         <TableContainer>
@@ -104,6 +106,13 @@ function Employees() {
         </TableContainer>
         <TablePagination />
       </Paper>
+      <Popup
+        title='Employee Form'
+        openPopup={openPopup}
+        setOpenPopup={setOpenPopup}
+      >
+        <EmployeeForm />
+      </Popup>
 
     </>
   )
